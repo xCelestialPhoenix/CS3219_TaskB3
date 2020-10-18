@@ -6,6 +6,7 @@ services:
   - mysql
 
 before_install:
+  - npm install
   - mysql -e 'CREATE DATABASE cs3219TaskB;'
   - mysql -e 'USE cs3219TaskB; CREATE TABLE IF NOT EXISTS users ( username VARCHAR(255) PRIMARY KEY, 
                 password VARCHAR(255), firstname VARCHAR(255),lastname VARCHAR(255), mobile INTEGER);'
@@ -14,10 +15,12 @@ cache:
   directories:
     - "node_modules"
 
-  deploy:
-    provider: lambda
-    function_name: "lambda-test"
-    region: "us-east-1"
-    role: "arn:aws:iam::0123456789012:role/lambda_basic_execution"
-    runtime: "nodejs12.0"
-    handler_name: "handler"
+before-deploy:
+  - openssl aes-256-cbc -K $encrypted_c175254be1c6_key -iv $encrypted_c175254be1c6_iv -in key_file.json.enc -out key_file.json -d
+
+deploy:
+  provider: gae
+  keyfile: key_file.json
+  project: regal-creek-290403
+  default: true
+  on: master
