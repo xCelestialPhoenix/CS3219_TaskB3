@@ -1,0 +1,23 @@
+language: node_js
+node_js: 
+  - "stable"
+
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE cs3219TaskB;'
+  - mysql -e 'USE cs3219TaskB; CREATE TABLE IF NOT EXISTS users ( username VARCHAR(255) PRIMARY KEY, 
+                password VARCHAR(255), firstname VARCHAR(255),lastname VARCHAR(255), mobile INTEGER);'
+
+cache:
+  directories:
+    - "node_modules"
+
+  deploy:
+    provider: lambda
+    function_name: "lambda-test"
+    region: "us-east-1"
+    role: "arn:aws:iam::0123456789012:role/lambda_basic_execution"
+    runtime: "nodejs12.0"
+    handler_name: "handler"

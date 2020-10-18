@@ -1,0 +1,9 @@
+name: github-test-and-deploy
+description: "Trigger on any PR targeting master"
+github:
+  owner: xcelestialphoenix
+  name: CS3219_TaskB3
+  pull_request:
+    branch: master
+filename: cloudbuild.yaml
+

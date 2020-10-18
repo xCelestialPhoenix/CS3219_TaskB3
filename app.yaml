@@ -1,0 +1,11 @@
+runtime: nodejs12
+
+env_variables:
+  SQL_USER: "root"
+  SQL_PASSWORD: "password"
+  SQL_DATABASE: "cs3219TaskB"
+  INSTANCE_CONNECTION_NAME: "regal-creek-290403:asia-southeast1:cs3219-task-b"
+  NODE_ENV: "production"
+
+beta_settings: 
+  cloud_sql_instances: "regal-creek-290403:asia-southeast1:cs3219-task-b"
